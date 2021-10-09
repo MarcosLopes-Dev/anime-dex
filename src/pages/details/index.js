@@ -1,3 +1,4 @@
+import Player from 'react-player/lazy';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../services/api';
@@ -7,15 +8,22 @@ function Details() {
   const { id } = useParams();
   const [anime, setAnime] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [recommendations, setRecommendations] = useState([]);
 
   useEffect(() => {
     async function loadData() {
-      const res = await api.get(`/anime/${id}`);
-      console.log(res.data);
-      setAnime(res.data);
+      const resAnime = await api.get(`/anime/${id}`);
+      console.log('Anime: ', resAnime.data);
+      setAnime(resAnime.data);
+
+      const resRecommendations = await api.get(`/anime/${id}/recommendations`);
+      console.log('Recommendations: ', resRecommendations.data.recommendations);
+      setRecommendations(resRecommendations.data.recommendations);
+
       setIsLoading(false);
     }
     loadData();
+    return () => setIsLoading(true);
   }, [id]);
 
   return (
@@ -63,7 +71,10 @@ function Details() {
           </header> 
         <section className="section">
           <h3 className="subtitle is-4">Synopse</h3>
-          <p className="has-text-justified">{anime.synopses}</p>
+          <p className="has-text-justified">{anime.synopsis}</p>
+        </section>
+        <section className="details-trailer">
+          <Player url={anime.trailer_url} controls />
         </section>
       </article>
     )}

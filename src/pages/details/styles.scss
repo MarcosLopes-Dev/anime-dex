@@ -26,4 +26,20 @@
         }
       }
     }
+    .details-trailer > div {
+      @media (max-width: 756px) {
+        height: 256px !important;
+        width: 256px !important;
+      }
+    }
+    .details .details-header {
+      @media (max-width: 768px) {
+        align-items: flex-start;
+        flex-direction: column;
+    
+        .details-photo {
+          margin-bottom: 1.25rem;
+        }
+      }
+    }
   }

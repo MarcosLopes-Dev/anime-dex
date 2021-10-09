@@ -12,8 +12,8 @@ function Nav() {
         <div className="navbar-item">
           <h1 className="title has-text-white-bis">[ AnimeDex ]</h1>
         </div>
-        <Link to="/" className="navbar-item">
-          Search
+        <Link to="./" className="navbar-item">
+          faça sua busca.
         </Link>
       </div>
     </nav>
